@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{ page.title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="{{ page.description }}">
+    <meta name="author" content="{{ page.description }}">
+
+    <title>{{ site.title }}</title>
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Slab:700|Roboto" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.0.4/fuse.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js" type="text/javascript"></script>
+
+    <link href="{{ '/assets/css/app.css' | relative_url }}" rel="stylesheet" />
+    <script src="{{ '/assets/javascripts/app.js' | relative_url }}" type="text/javascript"></script>
+</head>
+
+<body id="top">
+    <nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
+        <a class="navbar-brand" href="{{ '/#top' | relative_url }}">
+            <img src="{{ '/assets/logo_white.svg' | relative_url }}" />
+            Korps Limmat
+        </a>
+    </nav>
+
+    {{ content }}
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <p class='text-muted'>Die Inhalte von dieser Webseite wurden mit Sorgfalt und nach bestem Gewissen erstellt. Dennoch übernimmt
+                        der Anbieter dieser Webseite keine Gewähr für die Aktualität, Vollständigkeit und Richtigkeit der
+                        bereitgestellten Seiten und Inhalte.</p>
+                    <p class='text-muted'>Die Webseite enthält sog. „externe Links“ (Verlinkungen) zu anderen Webseiten, auf deren Inhalt der Anbieter
+                        der Webseite keinen Einfluss hat. Aus diesem Grund kann der Anbieter für diese Inhalte auch keine
+                        Gewähr übernehmen. Für die Inhalte und Richtigkeit der bereitgestellten Informationen ist der jeweilige
+                        Anbieter der verlinkten Webseite verantwortlich. Zum Zeitpunkt der Verlinkung waren keine Rechtsverstöße
+                        erkennbar. Bei Bekanntwerden einer solchen Rechtsverletzung wird der Link umgehend entfernen.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    {% include analytics.html %}
+
+</body>
+
+</html>

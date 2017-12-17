@@ -1,0 +1,37 @@
+---
+layout: default
+---
+<main>
+
+</main>
+<script>
+
+$.getJSON('{{ site.trello_board_url }}', function(data) {
+  var displayLists = [
+    {% for list in site.trello_board_lists  %}
+      '{{ list }}',
+    {% endfor %}
+  ]
+  var lists = _.groupBy(data.cards, function(card) { return card.idList });
+
+  if ('content' in document.createElement('template')) {
+    document.querySelector(".spinner").style.display = 'none';
+
+    _.forEach(_.pick(lists, displayLists), function(list) {
+      list = _.orderBy(list, [])
+      console.log(list)
+      _.forEach(list, function(card) {
+        var t = document.querySelector('#card-template');
+        t.content.querySelector(".card-title").textContent = card.name;
+        t.content.querySelector(".card-content").textContent = card.desc;
+
+        var target = document.querySelector("#cards");
+        var clone = document.importNode(t.content, true);
+        target.appendChild(clone);
+
+      });
+    });
+  }
+});
+
+</script>

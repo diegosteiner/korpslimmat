@@ -38,6 +38,9 @@ sass:
   # nested 138,7kB, compact 129,1kB, expanded 135,9 kB, compressed 122,4 kB
   style: compressed
 
+calendar_id: 'u041.ch_2oks1rk0m9up32uar4gjeohbqg@group.calendar.google.com'
+calendar_key: 'AIzaSyAfLGSRHVnGJJWcCFLTzj_3u4suH4E19fA'
+
 collections:
   redirects:
     output: true

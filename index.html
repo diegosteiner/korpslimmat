@@ -31,69 +31,54 @@ layout: default
 
 </main>
 <script>
+    $.ajax({
+        type: 'GET',
+        url: encodeURI('https://www.googleapis.com/calendar/v3/calendars/' +
+            '{{site.calendar_id}}' +
+            '/events?key={{site.calendar_key}}' +
+            '&maxResults=50' +
+            '&timeMin=' + new Date(Date.now()).toISOString()
+        ),
+        dataType: 'json',
+        success: function(response) {
+            var monthNames = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember']
+            _.forEach(response.items, function(event) {
+              var date = new Date((event.start.dateTime !== undefined ? event.start.dateTime : event.start.date))
+              event.start.dateObject = date
+              event.start.dayOfMonth = date.getDate()
+              event.start.month = date.getMonth()
+              event.start.year = date.getFullYear()
+            });
+            var years = _.groupBy(response.items, function(event) { return event.start.year });
+            _.forEach(years, function(year_events, year) {
+                var ty = document.querySelector('#template_year');
+                var tyc = document.importNode(ty.content, true);
+                tyc.querySelector("h1").textContent = year;
 
-      var mykey = 'AIzaSyAfLGSRHVnGJJWcCFLTzj_3u4suH4E19fA';
-var calendarid = 'u041.ch_2oks1rk0m9up32uar4gjeohbqg@group.calendar.google.com';
+                var months = _.groupBy(year_events, function(event) { return event.start.month });
+                _.forEach(months, function(month_events, month) {
 
-$.ajax({
-    type: 'GET',
-    url: encodeURI('https://www.googleapis.com/calendar/v3/calendars/' +
-      calendarid +
-      '/events?key=' + mykey +
-      '&maxResults=50' +
-      '&timeMin=' + new Date(Date.now()).toISOString()
-      ),
-    dataType: 'json',
-    success: function (response) {
-      var monthNames = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember']
-      var years = _.groupBy(response.items, function(item) {
-          console.log(item)
-          if(item.start.date !== undefined) {
-            return new Date(item.start.date).getFullYear()
-          } else {
-            return new Date(item.start.dateTime).getFullYear()
-          }
-        });
-      _.forEach(years, function(year_events, year) {
-        var ty = document.querySelector('#template_year');
-        var tyc = document.importNode(ty.content, true);
-        tyc.querySelector("h1").textContent = year;
+                    var tm = document.querySelector('#template_month');
+                    var tmc = document.importNode(tm.content, true);
+                    tmc.querySelector("h2").textContent = monthNames[month];
+                    month_events = _.sortBy(month_events, function(event) { return event.start.dayOfMonth })
 
-        var months = _.groupBy(year_events, function(item) {
-          if(item.start.date !== undefined) {
-            return new Date(item.start.date).getMonth()
-          } else {
-            return new Date(item.start.dateTime).getMonth()
-          }
-});
-        _.forEach(months, function(month_events, month) {
+                    _.forEach(month_events, function(event) {
+                        var te = document.querySelector('#template_event');
+                        var tec = document.importNode(te.content, true);
+                        tec.querySelector(".title").textContent = event.summary;
+                        tec.querySelector(".date").textContent = event.start.dayOfMonth;
 
-          var tm = document.querySelector('#template_month');
-          var tmc = document.importNode(tm.content, true);
-          tmc.querySelector("h2").textContent = monthNames[month];
+                        tmc.querySelector('ul').appendChild(tec)
+                    });
+                    tyc.querySelector('ul').appendChild(tmc)
+                });
 
-          _.forEach(month_events, function(event) {
-            var event_start = new Date((event.start.dateTime !== undefined ? event.start.dateTime : event.start.date))
-            var te = document.querySelector('#template_event');
-            var tec = document.importNode(te.content, true);
-            tec.querySelector(".title").textContent = event.summary;
-            tec.querySelector(".date").textContent = event_start.getDate();
-        //     // t.content.querySelector(".location").textContent = item.gd$where[0].valueString;
-
-          tmc.querySelector('ul').appendChild(tec)
-        });
-          tyc.querySelector('ul').appendChild(tmc)
-      });
-
-        document.querySelector("#events").appendChild(tyc);
-      //   var tmc = document.importNode(tm.content, true);
-      //   ty.querySelector("ul").appendChild(tec);
-      });
-
-
-    },
-    error: function (response) {
-        console.log(response);
-    }
-});
+                document.querySelector("#events").appendChild(tyc);
+            });
+        },
+        error: function(response) {
+            console.log(response);
+        }
+    });
 </script>

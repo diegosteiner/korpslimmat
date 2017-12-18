@@ -1,37 +1,99 @@
 ---
 layout: default
 ---
-<main>
+<template id='template_event'>
+  <li class="event">
+    <div class='flex-row'>
+      <date class='date'></date>
+      <div class='title'></div>
+    </div>
+  </li>
+</template>
+<template id='template_year'>
+  <li>
+  <h1></h1>
+  <ul class="year_events"></ul>
+  </li>
+</template>
+<template id='template_month'>
+  <li>
+    <h2></h2>
+    <ul class="month_events"></ul>
+  </li>
+</template>
+
+<main class="container">
+    <div class="row">
+        <div class="col">
+            <ul id="events"></ul>
+        </div>
+    </div>
 
 </main>
 <script>
 
-$.getJSON('{{ site.trello_board_url }}', function(data) {
-  var displayLists = [
-    {% for list in site.trello_board_lists  %}
-      '{{ list }}',
-    {% endfor %}
-  ]
-  var lists = _.groupBy(data.cards, function(card) { return card.idList });
+      var mykey = 'AIzaSyAfLGSRHVnGJJWcCFLTzj_3u4suH4E19fA';
+var calendarid = 'u041.ch_2oks1rk0m9up32uar4gjeohbqg@group.calendar.google.com';
 
-  if ('content' in document.createElement('template')) {
-    document.querySelector(".spinner").style.display = 'none';
+$.ajax({
+    type: 'GET',
+    url: encodeURI('https://www.googleapis.com/calendar/v3/calendars/' +
+      calendarid +
+      '/events?key=' + mykey +
+      '&maxResults=50' +
+      '&timeMin=' + new Date(Date.now()).toISOString()
+      ),
+    dataType: 'json',
+    success: function (response) {
+      var monthNames = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember']
+      var years = _.groupBy(response.items, function(item) {
+          console.log(item)
+          if(item.start.date !== undefined) {
+            return new Date(item.start.date).getFullYear()
+          } else {
+            return new Date(item.start.dateTime).getFullYear()
+          }
+        });
+      _.forEach(years, function(year_events, year) {
+        var ty = document.querySelector('#template_year');
+        var tyc = document.importNode(ty.content, true);
+        tyc.querySelector("h1").textContent = year;
 
-    _.forEach(_.pick(lists, displayLists), function(list) {
-      list = _.orderBy(list, [])
-      console.log(list)
-      _.forEach(list, function(card) {
-        var t = document.querySelector('#card-template');
-        t.content.querySelector(".card-title").textContent = card.name;
-        t.content.querySelector(".card-content").textContent = card.desc;
-
-        var target = document.querySelector("#cards");
-        var clone = document.importNode(t.content, true);
-        target.appendChild(clone);
-
-      });
-    });
-  }
+        var months = _.groupBy(year_events, function(item) {
+          if(item.start.date !== undefined) {
+            return new Date(item.start.date).getMonth()
+          } else {
+            return new Date(item.start.dateTime).getMonth()
+          }
 });
+        _.forEach(months, function(month_events, month) {
 
+          var tm = document.querySelector('#template_month');
+          var tmc = document.importNode(tm.content, true);
+          tmc.querySelector("h2").textContent = monthNames[month];
+
+          _.forEach(month_events, function(event) {
+            var event_start = new Date((event.start.dateTime !== undefined ? event.start.dateTime : event.start.date))
+            var te = document.querySelector('#template_event');
+            var tec = document.importNode(te.content, true);
+            tec.querySelector(".title").textContent = event.summary;
+            tec.querySelector(".date").textContent = event_start.getDate();
+        //     // t.content.querySelector(".location").textContent = item.gd$where[0].valueString;
+
+          tmc.querySelector('ul').appendChild(tec)
+        });
+          tyc.querySelector('ul').appendChild(tmc)
+      });
+
+        document.querySelector("#events").appendChild(tyc);
+      //   var tmc = document.importNode(tm.content, true);
+      //   ty.querySelector("ul").appendChild(tec);
+      });
+
+
+    },
+    error: function (response) {
+        console.log(response);
+    }
+});
 </script>

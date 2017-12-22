@@ -5,7 +5,10 @@ layout: default
   <li class="event">
     <div class='flex-row'>
       <date class='date'></date>
-      <div class='title'></div>
+      <div>
+        <div class='title'></div>
+        <div class='description'></div>
+      </div>
     </div>
   </li>
 </template>
@@ -30,6 +33,7 @@ layout: default
     </div>
 
 </main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.js" integrity="sha256-2/3+Q1kMYR8MDaqFPNBgmLgiqWJjySkg1wqLx/iE5Zo=" crossorigin="anonymous"></script>
 <script>
     $.ajax({
         type: 'GET',
@@ -43,11 +47,11 @@ layout: default
         success: function(response) {
             var monthNames = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember']
             _.forEach(response.items, function(event) {
-              var date = new Date((event.start.dateTime !== undefined ? event.start.dateTime : event.start.date))
+              var date = moment((event.start.dateTime !== undefined ? event.start.dateTime : event.start.date))
               event.start.dateObject = date
-              event.start.dayOfMonth = date.getDate()
-              event.start.month = date.getMonth()
-              event.start.year = date.getFullYear()
+              event.start.dayOfMonth = date.date()
+              event.start.month = date.month()
+              event.start.year = date.year()
             });
             var years = _.groupBy(response.items, function(event) { return event.start.year });
             _.forEach(years, function(year_events, year) {
@@ -66,8 +70,16 @@ layout: default
                     _.forEach(month_events, function(event) {
                         var te = document.querySelector('#template_event');
                         var tec = document.importNode(te.content, true);
+                        var description = ""
+                        console.log(event)
+
+                        if(event.start.dateTime !== undefined) { description += event.start.dateObject.format("HH:mm "); }
+                        if(event.location !== undefined) { description += event.location }
+
                         tec.querySelector(".title").textContent = event.summary;
                         tec.querySelector(".date").textContent = event.start.dayOfMonth;
+                        tec.querySelector(".description").textContent = description;
+
 
                         tmc.querySelector('ul').appendChild(tec)
                     });

@@ -1,0 +1,46 @@
+%section#current
+  .container
+    -#.container-background= image_tag "news/feed.svg"
+    .row
+      .col-md-7
+        %h3 News
+        %ul#news
+          %li
+            %h4
+              DiFF 14
+              %small.issuer Korpsleitung
+              %small.issued_at
+                %i.fa.fa-clock-o
+                = l(DateTime.new(2014, 4, 2, 20), format: :short)
+            %p.content
+              Der Korps Limmat veranstaltet das diesjährige DiFF. Endlich ist nun auch der
+              = link_to("Flyer und die Anmeldung", event_path(:diff14))
+              online!
+          %li
+            %h4
+              Webseite
+              %small.issuer Korpsleitung
+              %small.issued_at
+                %i.fa.fa-clock-o
+                = l(DateTime.new(2014, 2, 1, 20), format: :short)
+            %p.content
+              Das sind immer die ersten News: Unsere neue Webseite ist online! Sieht schon mal prächtig aus, bietet aber noch lange nicht das an,
+              was sie eigentlich könnte. Wir werden weiterhin daran Arbeiten und halten euch auf dem Laufenden!
+      .col-md-4.col-md-push-1
+        %h3 Agenda
+        %ul#events
+          %li#template_event.event
+            %h4.what
+            .when
+              %i.fa.fa-calendar-o
+              %span
+            .who
+              %i.fa.fa-group
+              %span
+            .where
+              %i.fa.fa-map-marker
+              %span
+            .description
+              %i.fa.fa-envelope
+              %a.more mehr zu diesem Event
+              %p

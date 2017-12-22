@@ -1,0 +1,27 @@
+%footer
+  .container
+    .row
+      .col-md-3.footer
+        %h3 Kontakt
+        %address
+          Diego Steiner v/o Filou
+          %br
+          Bachmannweg 7
+          %br
+          8046 Zürich
+          %br
+          = mail_to "info@korpslimmat.ch"
+
+      .col-md-3.footer
+        %h3 Impressum
+        &copy; 2014 Korps Limmat
+      .col-md-3.footer
+        %h3 Links
+        %ul
+          %li= link_to "Pfadi Züri", "http://www.pfadizueri.ch"
+          %li= link_to "Distrikt St. Georg", "http://www.distrikt.ch"
+          %li= link_to "Pfadiheime", "http://www.pfadiheime.ch"
+      .col-md-3.footer
+        .pfadizueri
+          = link_to "http://www.pfadizueri.ch/" do
+            = image_tag "http://www.pfadizueri.ch/tl_files/design/plogo.png"

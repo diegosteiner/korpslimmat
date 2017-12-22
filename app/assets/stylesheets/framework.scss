@@ -1,0 +1,38 @@
+@import "layouts/variables";
+@import url(http://fonts.googleapis.com/css?family=Raleway:400,700);
+
+// Overrides of the variables in separate file
+
+@import "bootstrap";
+
+// make all images responsive by default
+img {
+  @extend .img-responsive;
+  margin: 0 auto;
+}
+
+// use mixins to create semantic classes
+main {
+  @extend .container;
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+  box-sizing: border-box;
+  padding-top: 110px;
+  padding-bottom: 140px;
+  min-height: 100%;
+  position: relative;
+  background: image-url("pattern.png") repeat;
+}
+
+html {
+  overflow: -moz-scrollbars-vertical;
+  overflow-y: scroll;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  height: 100%;
+  position: relative;
+}

@@ -1,0 +1,4 @@
+= simple_form_for(@group, html: { class: "form-horizontal", role: "form" }) do |f|
+  = f.input :name
+  = f.association :parent
+  = f.button :submit

@@ -1,0 +1,2 @@
+module Event::SignupsHelper
+end

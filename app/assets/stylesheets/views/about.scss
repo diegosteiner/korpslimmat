@@ -1,0 +1,14 @@
+@import "layouts/main";
+
+#about {
+  @extend section.with-image;
+  background: image-url("bgtest3.jpg");
+  background-position: top center;
+  box-shadow: 0 0 15px rgba(#000, 1);
+
+  p {
+    font-size: 1.4em;
+    font-weight: bold;
+  }
+
+}

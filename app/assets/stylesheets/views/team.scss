@@ -1,0 +1,48 @@
+@import "layouts/main";
+@import "bootstrap/mixins";
+
+#team {
+  .member-picture {
+    $size: 185px;
+    background-position: center center;
+    background-size: contain;
+    background-color: #fff;
+    margin: 0 auto;
+
+    width: $size;
+    height: $size;
+    @include border-bottom-radius($size / 2);
+    @include border-top-radius($size / 2);
+    @include border-left-radius($size / 2);
+    @include border-right-radius($size / 2);
+
+    box-shadow: 0 0 10px rgba(#000, 0.5);
+    background-repeat: no-repeat;
+  }
+
+  .member-description {
+
+  }
+
+  .row {
+    margin-bottom: 4em;
+  }
+}
+
+.abteilungs-picture {
+  display: block;
+  $size: 200px;
+  background-position: center center;
+  background-size: contain;
+  background-color: white;
+  margin: 0 auto;
+
+  width: $size;
+  height: $size;
+  @include border-bottom-radius($size / 2);
+  @include border-top-radius($size / 2);
+  @include border-left-radius($size / 2);
+  @include border-right-radius($size / 2);
+  box-shadow: 0 0 10px rgba(#000, 0.5);
+  background-repeat: no-repeat;
+}

@@ -1,0 +1,46 @@
+@import "layouts/variables.scss";
+@import "bootstrap/mixins.scss";
+
+p {
+  font-family: $font-family-serif;
+  line-height: 1.8em;
+}
+
+a {
+  color: white;
+}
+
+.table {
+  .actions {
+    text-align: right;
+  }
+}
+
+section {
+  padding: 2em 0;
+  box-sizing: border-box;
+
+  margin-bottom: 10em;
+}
+
+section.with-image {
+  text-shadow: 1px 1px 5px rgba(#000, 1);
+  color: #FFF;
+}
+
+section {
+//  background: image-url("pattern.png") repeat;
+  background-color: lighten($color-primary, 40);
+  box-shadow: 0 0 15px rgba(#000, 0.5);
+  color: #222;
+  text-shadow: none;
+
+  a {
+    color: $color-primary;
+  }
+}
+
+section.white {
+  //  background: image-url("pattern.png") repeat;
+  background-color: #fff;
+}

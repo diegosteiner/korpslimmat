@@ -1,0 +1,124 @@
+@import "layouts/variables.scss";
+@import "bootstrap/mixins.scss";
+
+header {
+  width: 100%;
+  min-height: 90px;
+  position: fixed;
+  top: 0;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 5px 10px rgba(#000, 0.5);
+  z-index: 10;
+  background-color: $color-primary;
+
+  #brand-outer {
+    min-height: 60px;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    background: $color-primary;
+    box-sizing: border-box;
+    margin-bottom: 55px;
+
+    #brand-inner {
+      position: absolute;
+      min-height: 60px;
+      top: 45%;
+      width: 100%;
+      margin-top: -27px;
+
+      #logo {
+        float: left;
+        margin-right: 2em;
+
+        img {
+          height: 54px;
+          margin: 3px;
+        }
+      }
+
+      #title {
+        overflow: hidden;
+        white-space: nowrap;
+
+        h1 {
+          font-family: $font-family-sans-serif;
+          margin: 0.25em 0;
+          font-size: 1.8em;
+          font-weight: bold;
+        }
+
+        h2 {
+          //          display: none;
+          font-family: $font-family-sans-serif;
+          margin: 0;
+          font-size: 0.8em;
+          font-weight: normal;
+        }
+      }
+    }
+  }
+
+  #header-fader {
+    display: none;
+    position: absolute;
+    height: 25px;
+    width: 100%;
+    @include gradient-vertical(rgba($color-primary, 1), rgba($color-primary, 0));
+    bottom: 0;
+    position: absolute;
+  }
+
+  #nav {
+    position: absolute;
+    min-height: 30px;
+    bottom: 5px;
+    width: 100%;
+    background-image: image-url("layouts/rope.png");
+    background-position: center center;
+    background-repeat: repeat-x;
+    background-color: $color-primary;
+    background-size: 15px;
+
+    nav {
+      width: 100%;
+      text-align: center;
+
+      ul {
+        margin: 0 auto;
+        padding: 2px 1em 1px 1em;
+        display: inline-block;
+        background-color: $color-primary;
+        box-shadow: 0 0 30px $color-primary;
+
+        @media (max-width: $screen-xs-max) {
+          width: 100%;
+          display: none;
+          padding: 5px;
+        }
+
+        li {
+          @media (max-width: $screen-xs-max) {
+            display: block;
+            text-align: left;
+
+          }
+
+          display: inline-block;
+
+          a {
+            @media (max-width: $screen-xs-max) {
+              padding: 0.25em 0;
+            }
+            display: block;
+            color: white;
+            padding: 0.25em 2em;
+            font-size: 1em;
+            font-weight: bold;
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+}

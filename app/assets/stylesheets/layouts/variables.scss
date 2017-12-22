@@ -1,0 +1,45 @@
+@import "bootstrap/variables";
+
+// Overrides
+$color-primary:  #3fb1cb;
+$color-primary-light: lighten($color-primary, 0.15); //#d3dba3;
+$color-secondary: #1d4182;
+
+//$color-body-background: #f8f7f3;
+//$color-body-foreground: #362700;
+
+$color-title-foreground: $color-primary;
+
+$color-navbar-border: #fdfaf5;
+
+$color-button-default: #e0dfdb;
+$color-button-default-hover: #dce4b3;
+$color-button-primary: $color-primary;
+$color-button-primary-hover: #A5B361;
+
+// Bootstrap
+
+$brand-primary: $color-primary;
+//$body-bg: $color-primary;
+$text-color: darken(#FFF, 5%);
+
+$link-color: #FFF;
+$link-hover-color: darken($link-color, 5%);
+
+$input-border-focus: darken($color-primary, 5%);
+
+$btn-primary-color: #fff !default;
+$btn-primary-bg: $brand-primary;
+$btn-primary-border: darken($btn-primary-bg, 5%);
+
+//$navbar-default-bg: $color-body-background;
+$navbar-default-link-color: $color-primary;
+//$navbar-height: 80px;
+
+$font-family-sans-serif: 'Raleway', sans-serif;;
+$font-family-serif: 'Raleway', serif;
+$headings-font-family: $font-family-sans-serif;
+$headings-font-weight: 700;
+$font-family-base: $font-family-sans-serif;
+
+$font-size-h3: 2.5em;

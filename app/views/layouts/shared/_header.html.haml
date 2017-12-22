@@ -1,0 +1,19 @@
+%header
+  #brand-outer
+    #brand-inner
+      .container
+        .row
+          .col-md-12
+            #logo
+              = link_to root_path do
+                = image_tag 'layouts/badge.png'
+            #title
+              %h1 Korps Limmat
+              %h2.scrollpos Die Pfadiabteilungen aus der Region Limmat
+
+  #nav
+    .container
+      .row
+        .col-md-12
+          = render 'layouts/shared/navigation'
+  #header-fader

@@ -1,0 +1,37 @@
+
+#lilie-big {
+  display: none;
+  position: fixed;
+  width: 50%;
+  height: 100%;
+  background: image-url("layouts/lilie.svg") center center no-repeat;
+  background-size: contain;
+  right: -25%;
+  top: 0;
+  opacity: 0.5;
+  z-index: 20;
+}
+
+#scroll-down {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  z-index: 20;
+}
+
+body.single_page {
+
+  main {
+    margin-top: 50%;
+  }
+
+  section {
+    margin-top: 30% 0;
+  }
+
+  .row.prallax {
+    padding: 3em 0;
+  }
+}

@@ -1,0 +1,16 @@
+body.events_controller.show_action {
+  table {
+    td, th {
+      padding: 0.75em;
+      vertical-align: top;
+    }
+  }
+
+  section, section.white {
+    margin-bottom: 3em;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+}
